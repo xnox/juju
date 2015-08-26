@@ -7,13 +7,13 @@ package series_test
 import (
 	"fmt"
 
-	"github.com/juju/testing"
-	"github.com/juju/utils"
-
 	"github.com/gabriel-samfira/sys/windows/registry"
-	"github.com/juju/juju/juju/series"
+	"github.com/juju/testing"
 	jc "github.com/juju/testing/checkers"
+	"github.com/juju/utils"
 	gc "gopkg.in/check.v1"
+
+	"github.com/juju/juju/juju/series"
 )
 
 type windowsSeriesSuite struct {
