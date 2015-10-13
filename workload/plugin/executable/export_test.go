@@ -1,9 +1,9 @@
 // Copyright 2015 Canonical Ltd.
 // Licensed under the AGPLv3, see LICENCE file for details.
 
-package plugin
+package executable
 
 var (
-	FindBuiltin = findBuiltin
-	FindPlugin  = find
+	TestFindPlugin = findPlugin
+	RunCmd         = runCmd
 )
