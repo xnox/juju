@@ -33,7 +33,7 @@ type ImageURLGetterConfig struct {
 	CACert            []byte
 	CloudimgBaseUrl   string
 	CloudimgStream    string
-	ImageDownloadFunc func(kind instance.ContainerType, series, arch, cloudimgBaseUrl, cloudimgStream string) (string, error)
+	ImageDownloadFunc func(kind instance.ContainerType, series, arch, cloudimgStream, cloudimgBaseUrl string) (string, error)
 }
 
 type imageURLGetter struct {
@@ -48,7 +48,7 @@ func NewImageURLGetter(config ImageURLGetterConfig) ImageURLGetter {
 
 // ImageURL is specified on the NewImageURLGetter interface.
 func (ug *imageURLGetter) ImageURL(kind instance.ContainerType, series, arch string) (string, error) {
-	imageURL, err := ug.config.ImageDownloadFunc(kind, series, arch, ug.config.CloudimgBaseUrl, ug.config.CloudimgStream)
+	imageURL, err := ug.config.ImageDownloadFunc(kind, series, arch, ug.config.CloudimgStream, ug.config.CloudimgBaseUrl)
 	if err != nil {
 		return "", errors.Annotatef(err, "cannot determine LXC image URL: %v", err)
 	}
@@ -67,7 +67,7 @@ func (ug *imageURLGetter) CACert() []byte {
 
 // ImageDownloadURL determines the public URL which can be used to obtain an
 // image blob with the specified parameters.
-func ImageDownloadURL(kind instance.ContainerType, series, arch, cloudimgBaseUrl, cloudimgStream string) (string, error) {
+func ImageDownloadURL(kind instance.ContainerType, series, arch, cloudimgStream, cloudimgBaseUrl string) (string, error) {
 	// TODO - we currently only need to support LXC images - kind is ignored.
 	if kind != instance.LXC {
 		return "", errors.Errorf("unsupported container type: %v", kind)
